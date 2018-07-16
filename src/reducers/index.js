@@ -1,10 +1,8 @@
-import { MSG_ADD_SUCCESSFUL } from '../actions';
+import { MSG_ADD_SUCCESSFUL, USER_SET } from '../actions';
 
 export const initialState = {
-  messages: [
-    { time: 1531511914169, author: 'anonymous', content: 'lorem ipsum' }
-  ],
-  user: 'anonymous'
+  messages: [],
+  user: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +13,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         messages: [...state.messages, payload]
+      };
+
+    case USER_SET:
+      return {
+        ...state,
+        user: payload
       };
 
     default:

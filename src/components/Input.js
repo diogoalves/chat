@@ -24,9 +24,10 @@ class Input extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    const { user } = this.props;
     const value = this.state.value.trim();
     if (value) {
-      this.props.dispatch(actions.addMsg({ author: 'diogo', content: value }));
+      this.props.dispatch(actions.addMsg({ author: user, content: value }));
     }
     this.setState(() => ({ value: '' }));
   };
@@ -48,4 +49,8 @@ class Input extends Component {
   }
 }
 
-export default connect()(withStyles(styles)(Input));
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(Input));

@@ -20,7 +20,7 @@ function Conversation(props) {
       {messages.map((e, i) => (
         <MessageItem
           key={i}
-          time={e.time}
+          time={new Date(e.time).toLocaleString()}
           author={e.author}
           content={e.content}
         />
