@@ -26,9 +26,7 @@ class Input extends Component {
     event.preventDefault();
     const value = this.state.value.trim();
     if (value) {
-      this.props.dispatch(
-        actions.addMsg({ time: new Date().getTime(), content: value })
-      );
+      this.props.dispatch(actions.addMsg({ author: 'diogo', content: value }));
     }
     this.setState(() => ({ value: '' }));
   };

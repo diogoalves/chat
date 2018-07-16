@@ -1,21 +1,20 @@
-import { MSG_ADD } from '../actions';
+import { MSG_ADD_SUCCESSFUL } from '../actions';
 
 export const initialState = {
   messages: [
     { time: 1531511914169, author: 'anonymous', content: 'lorem ipsum' }
   ],
-  user: 'anonymous',
-  connection: null
+  user: 'anonymous'
 };
 
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case MSG_ADD:
+    case MSG_ADD_SUCCESSFUL:
       return {
         ...state,
-        messages: [...state.messages, { ...payload, author: state.user }]
+        messages: [...state.messages, payload]
       };
 
     default:
