@@ -1,8 +1,9 @@
-import { MSG_ADD_SUCCESSFUL, USER_SET } from '../actions';
+import { MSG_ADD_SUCCESSFUL, USER_SET, USERS_QUANTITY_SET } from '../actions';
 
 export const initialState = {
   messages: [],
-  user: null
+  user: null,
+  quantity: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +20,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: payload
+      };
+
+    case USERS_QUANTITY_SET:
+      return {
+        ...state,
+        quantity: payload
       };
 
     default:

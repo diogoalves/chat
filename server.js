@@ -14,16 +14,32 @@ app.get('*', function(req, res) {
 });
 
 io.on('connection', function(socket){
-  socket.broadcast.emit('hi');
+  io.clients((error, clients) => io.emit('action', setUsersQuantity(clients.length)));
+
   socket.on('disconnect', function(){
-    console.log('user disconnected');
+    io.clients((error, clients) => io.emit('action', setUsersQuantity(clients.length)));
   });
+
   socket.on('MSG_ADD', function(content){
-    const payload = {time: new Date().getTime(), ...content}
-    io.emit('action', {type: 'MSG_ADD_SUCCESSFUL', payload});
+    io.emit('action', addMsgSuccessful(content));
   });
 });
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
+});
+
+
+
+const addMsgSuccessful = content => ({
+  type: 'MSG_ADD_SUCCESSFUL',
+  payload: {
+    time: new Date().getTime(),
+    ...content
+  }
+});
+
+const setUsersQuantity = payload => ({
+  type: 'USERS_QUANTITY_SET',
+  payload
 });
