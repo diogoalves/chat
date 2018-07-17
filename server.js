@@ -15,6 +15,7 @@ app.get('*', function(req, res) {
 
 io.on('connection', function(socket){
   io.clients((error, clients) => io.emit('action', setUsersQuantity(clients.length)));
+  io.emit('action', addMsgSuccessful(welcomeMessage));
 
   socket.on('disconnect', function(){
     io.clients((error, clients) => io.emit('action', setUsersQuantity(clients.length)));
@@ -29,7 +30,10 @@ http.listen(3000, function(){
   console.log('listening on *:3000');
 });
 
-
+const welcomeMessage = ({
+  author: 'HAL 9000',
+  content: "hi, what's up?"
+})
 
 const addMsgSuccessful = content => ({
   type: 'MSG_ADD_SUCCESSFUL',
