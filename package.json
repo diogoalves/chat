@@ -1,0 +1,31 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "a P2P chat App using React/Redux/Socker.io/WebRTC",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^2.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "deploy": "cd frontend && npm install && npm run build && cd build && cp ../../package.json . && cp ../../server.js . && now --public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diogoalves/chat.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "socket.io",
+    "webrtc"
+  ],
+  "author": "diogo.alves@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/diogoalves/chat/issues"
+  },
+  "homepage": "https://github.com/diogoalves/chat#readme"
+}
