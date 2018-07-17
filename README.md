@@ -15,10 +15,10 @@ $ cd frontend
 $ npm install 
 $ npm build
 $ cd 
-$ npm insall
+$ npm install
 ```
 
-### deploy
+### Deploy
 first install [now](https://zeit.co/now) tool.
 After that, run the following command.
 
