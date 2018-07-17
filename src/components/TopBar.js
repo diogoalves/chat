@@ -9,11 +9,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Badge from '@material-ui/core/Badge';
 import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import Avatar from '@material-ui/core/Avatar';
 import actions from '../actions';
+import deepOrange from '@material-ui/core/colors/deepOrange';
 
 const styles = {
   root: {
@@ -28,6 +27,11 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20
+  },
+  orangeAvatar: {
+    margin: 10,
+    color: '#fff',
+    backgroundColor: deepOrange[500]
   }
 };
 
@@ -64,24 +68,14 @@ class TopBar extends React.Component {
     const { opened, value } = this.state;
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default">
+        <AppBar position="static">
           <Toolbar>
-            <Tooltip title="Connected users" placement="right">
-              <Badge
-                className={classes.menuButton}
-                color="secondary"
-                badgeContent={quantity}
-              >
-                <IconButton
-                  aria-owns="menu-appbar"
-                  aria-haspopup="true"
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-              </Badge>
+            <Tooltip title="Connected users" placement="bottom">
+              <Avatar className={classes.orangeAvatar}>{quantity}</Avatar>
             </Tooltip>
-            <Button onClick={this.toggle}>{user}</Button>
+            <Button onClick={this.toggle} color="inherit">
+              {user}
+            </Button>
           </Toolbar>
           <Dialog open={!user || opened} onClose={this.toggle}>
             <DialogTitle>Please choose your name</DialogTitle>
