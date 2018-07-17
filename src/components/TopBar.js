@@ -35,7 +35,7 @@ const styles = {
   }
 };
 
-class TopBar extends React.Component {
+class TopBar extends Component {
   state = {
     opened: false,
     value: ''

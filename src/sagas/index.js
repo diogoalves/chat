@@ -1,6 +1,6 @@
 import { takeEvery } from 'redux-saga/effects';
 
-function* addMessage(socket, action) {
+function addMessage(socket, action) {
   socket.emit('MSG_ADD', action.payload);
 }
 
