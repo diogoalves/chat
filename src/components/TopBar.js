@@ -17,7 +17,10 @@ import actions from '../actions';
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    position: 'sticky',
+    top: 0,
+    width: '100%'
   },
   flex: {
     flex: 1
