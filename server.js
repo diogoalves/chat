@@ -4,46 +4,42 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const path = require('path');
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});
-
 app.use(express.static(path.join(__dirname, '/')));
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, '/', 'index.html'));
-});
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '/', 'index.html')));
 
-io.on('connection', function(socket){
-  io.clients((error, clients) => io.emit('action', setUsersQuantity(clients.length)));
-  io.emit('action', addMsgSuccessful(welcomeMessage));
-
-  socket.on('disconnect', function(){
-    io.clients((error, clients) => io.emit('action', setUsersQuantity(clients.length)));
+io.on('connection', (socket) => {
+  io.clients((error, clients) => {
+    io.emit('action', actions.setUsersQuantity(clients.length))
+    io.emit('action', actions.addMsgSuccessful(welcomeMessage(clients.length), true));
   });
 
-  socket.on('MSG_ADD', function(content){
-    io.emit('action', addMsgSuccessful(content));
+  socket.on('disconnect', () => io.clients((error, clients) => io.emit('action', actions.setUsersQuantity(clients.length))));
+  socket.on('MSG_ADD', payload => {
+    io.emit('action', actions.addMsgSuccessful(payload, true));
+    socket.broadcast.emit('action', actions.sendNotification(`New message from ${payload.author}`))
   });
 });
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+http.listen(3000, () => console.log('listening on *:3000'));
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const createAction = type => (payload, withTime) => ({ type, payload: !withTime ? payload : {...payload, time: new Date().getTime()} });
+
+const actions = ({
+  addMsgSuccessful: createAction('MSG_ADD_SUCCESSFUL'),
+  setUsersQuantity: createAction('USERS_QUANTITY_SET'),
+  sendNotification: createAction('NOTIFICATION')
 });
 
-const welcomeMessage = ({
-  author: 'HAL 9000',
-  content: "hi, what's up?"
-})
-
-const addMsgSuccessful = content => ({
-  type: 'MSG_ADD_SUCCESSFUL',
-  payload: {
-    time: new Date().getTime(),
-    ...content
+const welcomeMessage = members => {
+  let content;
+  if(members === 1) {
+    content = 'Hi, you are the first person in this chat room. What´s up?'
+  } else {
+    content = `Someone just arrived. Now we are ${members} in total.`
   }
-});
-
-const setUsersQuantity = payload => ({
-  type: 'USERS_QUANTITY_SET',
-  payload
-});
+  return ({
+    author: 'HAL 9000',
+    content    
+  });
+}
