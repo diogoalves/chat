@@ -10,7 +10,7 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    position: 'sticky',
+    position: 'absolute',
     bottom: 0,
     width: '100%'
   }

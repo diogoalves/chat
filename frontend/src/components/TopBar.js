@@ -17,7 +17,7 @@ import deepOrange from '@material-ui/core/colors/deepOrange';
 const styles = {
   root: {
     flexGrow: 1,
-    position: 'sticky',
+    position: 'fixed',
     top: 0,
     width: '100%'
   },

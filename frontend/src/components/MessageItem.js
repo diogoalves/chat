@@ -1,14 +1,11 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const MessageItem = ({ time, author, content }) => (
-  <Typography component="p">
-    <em>
-      <small>{time}</small>
-    </em>
-    <strong>{` ${author}> `}</strong>
-    {content}
-  </Typography>
+  <ListItem>
+    <ListItemText>{`[${time}] ${author}> ${content}`}</ListItemText>
+  </ListItem>
 );
 
 export default MessageItem;

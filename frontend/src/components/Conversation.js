@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import MessageItem from './MessageItem';
+import List from '@material-ui/core/List';
 
 const styles = theme => ({
   root: {
-    ...theme.mixins.gutters(),
+    position: 'absolute',
+    top: theme.spacing.unit * 9,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  paper: {
     paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    paddingBottom: theme.spacing.unit * 2,
+    height: 'calc(100vh - 170px)',
+    overflow: 'auto'
   }
 });
 
 class Conversation extends Component {
   scrollToBottom = () => {
-    window.scrollTo(0, document.body.scrollHeight);
+    const messagesDiv = document.getElementById('messages');
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
   };
 
   componentDidMount() {
@@ -28,16 +37,20 @@ class Conversation extends Component {
   render() {
     const { messages = [], classes } = this.props;
     return (
-      <Paper className={classes.root} elevation={1}>
-        {messages.map((e, i) => (
-          <MessageItem
-            key={i}
-            time={new Date(e.time).toLocaleString()}
-            author={e.author}
-            content={e.content}
-          />
-        ))}
-      </Paper>
+      <div className={classes.root}>
+        <div id="messages" className={classes.paper}>
+          <List>
+            {messages.map((e, i) => (
+              <MessageItem
+                key={i}
+                time={new Date(e.time).toLocaleTimeString()}
+                author={e.author}
+                content={e.content}
+              />
+            ))}
+          </List>
+        </div>
+      </div>
     );
   }
 }
