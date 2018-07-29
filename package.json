@@ -10,7 +10,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "deploy": "cd frontend && npm install && npm run build && cd build && cp ../../package.json . && cp ../../server.js . && now --public"
+    "deploy": "cd frontend && npm install && npm run build && cd build && cp ../../package.json . && cp ../../server.js . && now --public",
+    "dev": "cd frontend && npm run build && cd build && cp ../../package.json . && cp ../../server.js . && node server.js"
   },
   "repository": {
     "type": "git",
