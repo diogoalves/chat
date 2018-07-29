@@ -82,6 +82,7 @@ class TopBar extends Component {
             <DialogContent>
               <form onSubmit={this.handleSubmit}>
                 <TextField
+                  autoFocus
                   placeholder="anonymous"
                   margin="normal"
                   value={value}

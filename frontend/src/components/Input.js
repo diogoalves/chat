@@ -40,6 +40,7 @@ class Input extends Component {
       <Paper className={this.props.classes.root} elevation={1}>
         <form onSubmit={this.handleSubmit}>
           <TextField
+            autoFocus
             placeholder="Write a message here"
             fullWidth
             margin="normal"
