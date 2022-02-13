@@ -20,7 +20,7 @@ $ npm install
 
 ### Deploy
 first install [now](https://zeit.co/now) tool.
-After that, run the following command.
+After that, run the following command. 
 
 ```sh
 $ npm run deploy
